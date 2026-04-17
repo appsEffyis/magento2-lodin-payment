@@ -1,0 +1,42 @@
+{
+    "name": "lodin/magento2-payment",
+    "description": "Lodin RTP Payment Gateway for Magento 2 - Accept instant payments securely",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "name": "Lodin",
+            "email": "support@lodinpay.com",
+            "homepage": "https://lodinpay.com"
+        }
+    ],
+    "keywords": [
+        "magento2",
+        "payment",
+        "gateway",
+        "lodin",
+        "rtp",
+        "instant payment",
+        "real-time payment"
+    ],
+    "require": {
+        "php": "^8.1",
+        "magento/framework": "^103.0",
+        "magento/module-payment": "^100.4",
+        "magento/module-checkout": "^100.4",
+        "magento/module-sales": "^103.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Lodin\\Payment\\": ""
+        }
+    },
+    "support": {
+        "email": "support@lodinpay.com",
+        "docs": "https://docs.lodinpay.com/magento2"
+    }
+}

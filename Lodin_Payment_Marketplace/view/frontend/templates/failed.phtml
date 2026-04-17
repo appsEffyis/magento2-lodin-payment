@@ -1,0 +1,17 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+$orderId = (string) $block->getRequest()->getParam('order_id');
+?>
+<div class="lodin-payment-result">
+    <h1><?= $block->escapeHtml(__('Payment failed')) ?></h1>
+    <?php if ($orderId !== ''): ?>
+        <p><?= $block->escapeHtml(__('Order #: %1', $orderId)) ?></p>
+    <?php endif; ?>
+    <p><?= $block->escapeHtml(__('Your payment was not completed. Please try again or choose another payment method.')) ?></p>
+    <p>
+        <a class="action primary" href="<?= $block->escapeUrl($block->getUrl('checkout/cart')) ?>">
+            <span><?= $block->escapeHtml(__('Back to cart')) ?></span>
+        </a>
+    </p>
+</div>
+

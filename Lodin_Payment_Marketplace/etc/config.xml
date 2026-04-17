@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <lodin>
+                <active>1</active>
+                <model>Lodin\Payment\Model\Lodin</model>
+                <order_status>pending_payment</order_status>
+                <title>Pay with bank</title>
+                <payment_action>order</payment_action>
+                <can_use_checkout>1</can_use_checkout>
+                <can_authorize>1</can_authorize>
+                <can_capture>0</can_capture>
+                <can_use_internal>0</can_use_internal>
+                <is_gateway>1</is_gateway>
+                <sort_order>1</sort_order>
+            </lodin>
+        </payment>
+    </default>
+</config>

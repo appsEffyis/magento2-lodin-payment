@@ -1,0 +1,55 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+$mode = (string) $block->getData('mode');
+$pollUrl = (string) $block->getData('poll_url');
+$redirectUrl = (string) $block->getData('redirect_url');
+$orderIncrement = (string) $block->getData('order_increment_id');
+$delay = (int) $block->getData('delay_seconds');
+if ($delay < 1) {
+    $delay = 2;
+}
+?>
+<div class="lodin-payment-result lodin-payment-result-<?= $block->escapeHtmlAttr($mode) ?>">
+    <?php if ($mode === 'success'): ?>
+        <h1><?= $block->escapeHtml(__('Payment confirmed')) ?></h1>
+        <?php if ($orderIncrement !== ''): ?>
+            <p><?= $block->escapeHtml(__('Order #: %1', $orderIncrement)) ?></p>
+        <?php endif; ?>
+        <p><?= $block->escapeHtml(__('You will be redirected to the order confirmation page.')) ?></p>
+        <?php if ($redirectUrl !== ''): ?>
+            <meta http-equiv="refresh" content="<?= (int) $delay ?>;url=<?= $block->escapeUrl($redirectUrl) ?>">
+            <p>
+                <a class="action primary" href="<?= $block->escapeUrl($redirectUrl) ?>">
+                    <?= $block->escapeHtml(__('Continue')) ?>
+                </a>
+            </p>
+            <script>
+                setTimeout(function () {
+                    window.location.href = <?= json_encode($redirectUrl, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
+                }, <?= (int) $delay * 1000 ?>);
+            </script>
+        <?php endif; ?>
+    <?php else: ?>
+        <h1><?= $block->escapeHtml(__('Confirming payment…')) ?></h1>
+        <?php if ($orderIncrement !== ''): ?>
+            <p><?= $block->escapeHtml(__('Order #: %1', $orderIncrement)) ?></p>
+        <?php endif; ?>
+        <p><?= $block->escapeHtml(__('Please wait while we confirm your payment.')) ?></p>
+        <?php if ($pollUrl !== ''): ?>
+            <meta http-equiv="refresh" content="<?= (int) $delay ?>;url=<?= $block->escapeUrl($pollUrl) ?>">
+            <p class="lodin-payment-result-note">
+                <?= $block->escapeHtml(__('This page will refresh automatically.')) ?>
+            </p>
+            <p>
+                <a class="action primary" href="<?= $block->escapeUrl($pollUrl) ?>">
+                    <?= $block->escapeHtml(__('Refresh now')) ?>
+                </a>
+            </p>
+            <script>
+                setTimeout(function () {
+                    window.location.href = <?= json_encode($pollUrl, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
+                }, <?= (int) $delay * 1000 ?>);
+            </script>
+        <?php endif; ?>
+    <?php endif; ?>
+</div>
